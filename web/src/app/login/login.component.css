@@ -1,0 +1,30 @@
+.login-block {
+    margin: 30px auto;
+    min-height: 93.6vh
+}
+
+.login-block .auth-box {
+    margin: 20px auto 0;
+    max-width: 450px
+}
+
+.login-block .auth-box .confirm h3 {
+    color: #4099ff;
+    font-size: 34px
+}
+
+.login-block .auth-box i.icofont-check-circled {
+    font-size: 42px
+}
+
+.login-block.offline-404 .auth-box {
+    max-width: 650px
+}
+
+.login-block.offline-404 .auth-box h1 {
+    color: #2c3e50;
+    font-size: 160px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-shadow: 3px -2px 4px rgba(128, 128, 128, .57)
+}

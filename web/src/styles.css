@@ -1,0 +1,13 @@
+.navbar-wrapper>.navbar .container-fluid {
+    display: block !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.loader-center {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
