@@ -11,11 +11,9 @@ export class InterceptorService implements HttpInterceptor {
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('[InterceptorService][intercept]');
 
-    // TODO: Cambiar codigo
     const headers = new HttpHeaders({
-      'token-usuario': 'YTUTY3543SDFGBVHJK'
+      token: localStorage.getItem('token')
     });
 
     const reqClone = req.clone({

@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class UsuarioService {
 
-  usuario: Usuario;
+  usuario: any;
   token: string;
 
   constructor(
@@ -18,6 +18,10 @@ export class UsuarioService {
     private router: Router
   ) {
     this.cargarStorage();
+  }
+
+  get userId(): string {
+    return this.usuario.id;
   }
 
   estaLogueado() {
@@ -34,8 +38,7 @@ export class UsuarioService {
     }
   }
 
-  guardarStorage(id: string, token: string, usuario: Usuario) {
-    localStorage.setItem('id', id);
+  guardarStorage(id: string, token: string, usuario: any) {
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
@@ -53,7 +56,7 @@ export class UsuarioService {
     this.router.navigate(['/login']);
   }
 
-  login(usuario: Usuario, recordar: boolean = false) {
+  login(usuario: any, recordar: boolean = false) {
 
     if (recordar) {
       localStorage.setItem('email', usuario.email);
@@ -66,7 +69,7 @@ export class UsuarioService {
     return this.http.post(url, usuario)
     .pipe(
       map((resp: any) => {
-        this.guardarStorage(resp.usuario.id, resp.token, usuario);
+        this.guardarStorage(resp.usuario.id, resp.token, resp.usuario);
         return true;
       })
     );

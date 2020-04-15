@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   recuerdame = false;
   loading = false;
   year: number;
-  email = '';
-  password = '';
+  email: string;
+  password: string;
 
   constructor(
     private router: Router,
@@ -30,12 +30,10 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let usuario = new Usuario(
-      null,
-      null,
-      forma.value.email,
-      forma.value.password
-    );
+    const usuario = {
+      email: forma.value.email,
+      password: forma.value.password
+    };
 
     this.loading = true;
 
