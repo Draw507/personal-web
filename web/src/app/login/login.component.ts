@@ -14,9 +14,8 @@ export class LoginComponent implements OnInit {
   recuerdame = false;
   loading = false;
   year: number;
-  // TODO: Credenciales de prueba
-  email = 'eve.holt@reqres.in';
-  password = 'cityslicka';
+  email = '';
+  password = '';
 
   constructor(
     private router: Router,
@@ -27,12 +26,12 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar(forma: NgForm) {
-    console.log('[LoginComponent][ingresar] Forma inválida: ', forma.invalid);
     if (forma.invalid) {
       return;
     }
 
     let usuario = new Usuario(
+      null,
       null,
       forma.value.email,
       forma.value.password

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'https://reqres.in'
+  url: 'https://us-central1-personal-webapp-9a867.cloudfunctions.net/api'
 };

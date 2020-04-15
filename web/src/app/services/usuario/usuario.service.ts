@@ -21,8 +21,6 @@ export class UsuarioService {
   }
 
   estaLogueado() {
-    // TODO: Reemplazar est código
-    // return true;
     return (this.token.length > 5);
   }
 
@@ -63,12 +61,12 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
 
-    const url = environment.url + '/api/login';
+    const url = environment.url + '/login';
 
     return this.http.post(url, usuario)
     .pipe(
       map((resp: any) => {
-        this.guardarStorage('0', resp.token, usuario);
+        this.guardarStorage(resp.usuario.id, resp.token, usuario);
         return true;
       })
     );

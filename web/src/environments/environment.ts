@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://reqres.in'
+  url: 'http://localhost:5000/personal-webapp-9a867/us-central1/api'
 };
 
 /*

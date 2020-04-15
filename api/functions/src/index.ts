@@ -73,7 +73,7 @@ app.post('/login', async (req, res) => {
         const usuario = docsSnap.docs.map(doc => doc.data());
         if (bcrypt.compareSync(body.password, usuario[0].password)) {
             const respUsuario = {
-                id: usuario[0].id,
+                id: docsSnap.docs[0].id,
                 email: usuario[0].email,
                 nombre: usuario[0].nombre
             };
@@ -112,27 +112,96 @@ app.get('/usuarios', verificaToken, async (req, res) => {
 });
 
 // ============================================
-// 
+// Usuarios -  Crea un usuario
 // ============================================
-app.post('/usuarios/:id', verificaToken, async (req, res) => {
+app.post('/usuarios', verificaToken, (req, res) => {
+    const body = req.body;
+    db.collection("usuarios").add({
+        nombre: body.nombre,
+        email: body.email,
+        password: bcrypt.hashSync(body.password, 10),
+        salarios: [
+            {
+                empresa: body.empresa,
+                fecha: body.fecha,
+                salarioBruto: body.salarioBruto,
+                salarioNeto: body.salarioNeto,
+                activo: true
+            }
+        ]
+    })
+    .then(ref => {
+        return res.status(200).json({
+            ok: true,
+            usuarioId: ref.id,
+            mensaje: 'Usuario registrado correctamente.'
+        });
+    })
+    .catch(function(error) {
+        return res.status(500).json({
+            ok: false,
+            errors: error
+        });
+    });
+});
+
+// ============================================
+// Cuenta - Crea una nueva cuenta asociada a un usuario
+// ============================================
+app.post('/cuentas', verificaToken, (req, res) => {
+    const body = req.body;
+    db.collection("cuentas").add({
+        mes: body.mes,
+        anio: body.anio,
+        usuarios: [
+            {
+                usuario: db.doc(`usuarios/${body.usuarioId}`),
+                gastos: body.gastos
+            }
+        ]
+    })
+    .then(ref => {
+        return res.status(200).json({
+            ok: true,
+            cuentaId: ref.id,
+            mensaje: 'Cuenta registrada correctamente.'
+        });
+    })
+    .catch(function(error) {
+        return res.status(500).json({
+            ok: false,
+            errors: error
+        });
+    });
+});
+
+// ============================================
+// Cuenta - Obtener las cuentas para un usuario
+// ============================================
+app.get('/cuentas/:id', verificaToken, async (req, res) => {
     const id = req.params.id;
-    const usuarioRef = db.collection('usuarios').doc(id);
-    const docsSnap = await usuarioRef.get();
+    const cuentaRef = db.collection('cuentas').doc(id);
+    const docsSnap = await cuentaRef.get();
 
     if(!docsSnap.exists){
         res.status(404).json({
             ok: false,
-            mensaje: 'No existe el usuario con el Id ' + id
+            mensaje: 'No existe una cuenta para el Usuario'
         });
-    } else{
-        //const antes = docsSnap.data() || { nombre: 'Armando' };
-        await usuarioRef.update({
-            password: bcrypt.hashSync('123456', 10)
-        });
+    } else {
+        const cuenta = docsSnap.data() || {};
+        
+        for (const key in cuenta.usuarios) {
+            let u = (await db.doc(`usuarios/${cuenta.usuarios[key].usuario._path.segments[1]}`).get()).data();
+            u = u || {};
+            delete u.password;
 
-        res.status(200).json({
+            cuenta.usuarios[key].usuario = u;
+        }
+        
+        res.json({
             ok: true,
-            mensaje: 'Correcto'
+            cuenta
         });
     }   
 });
