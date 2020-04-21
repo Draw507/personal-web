@@ -15,11 +15,14 @@ export class DashboardComponent implements OnInit {
     cuentaService.getCuenta().subscribe((resp: any) => {
       this.mes = resp;
       this.loading = false;
-      console.log('Cuenta datos: ', this.mes);
     });
   }
 
   ngOnInit(): void {
+  }
+
+  saveMes() {
+    console.log(this.mes);
   }
 
 }

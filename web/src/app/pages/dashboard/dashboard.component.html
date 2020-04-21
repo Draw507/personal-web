@@ -1,79 +1,139 @@
 <div class="pcoded-inner-content">
     <div class="main-body">
         <div class="page-wrapper">
-            <div class="page-body" *ngIf="!loading">
+            <div class="page-body animated fadeIn" *ngIf="!loading">
                 <div class="row">
-                    <div class="col-xl-4">
-                        <div class="col-12">
-                            <div class="card prod-p-card card-blue" *ngFor="let usuario of mes.cuenta.usuarios">
-                                <div class="card-body">
-                                    <div class="row align-items-center m-b-30">
-                                        <div class="col">
-                                            <h6 class="m-b-5 text-white">Salario mensual</h6>
-                                            <h3 class="m-b-0 f-w-700 text-white">{{ usuario.usuario.salarios[0].salarioBruto | currency }}</h3>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-money-bill-alt text-c-green f-18"></i>
+                    <div class="col-xl-12">
+                        <div class="card product-progress-card">
+                            <div class="card-block">
+                                <div class="row pp-main">
+                                    <div class="col-xl-6 col-md-6">
+                                        <div class="pp-cont">
+                                            <div class="row align-items-center m-b-20">
+                                                <div class="col-auto">
+                                                    <i class="fas fa-dollar-sign f-24 text-mute"></i>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <h2 class="m-b-0 text-c-blue">2476</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center m-b-15">
+                                                <div class="col-auto">
+                                                    <p class="m-b-0">Total Product</p>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <p class="m-b-0 text-c-blue"><i class="fas fa-long-arrow-alt-up m-r-10"></i>64%</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-c-blue" style="width:45%"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <p class="m-b-0 text-white">
-                                        Salario neto {{ usuario.usuario.salarios[0].salarioNeto | currency }}
-                                    </p>
+                                    <div class="col-xl-6 col-md-6">
+                                        <div class="pp-cont">
+                                            <div class="row align-items-center m-b-20">
+                                                <div class="col-auto">
+                                                    <i class="fas fa-random f-24 text-mute"></i>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <h2 class="m-b-0 text-c-yellow">63%</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center m-b-15">
+                                                <div class="col-auto">
+                                                    <p class="m-b-0">Conversion Rate</p>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <p class="m-b-0 text-c-yellow"><i class="fas fa-long-arrow-alt-up m-r-10"></i>64%</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-c-yellow" style="width:65%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
                         <div class="card">
                             <div class="card-header">
-                                <h5>1Q</h5>
-                                <!-- <div class="card-header-right">
-                                    <ul class="list-unstyled card-option" style="width: 30px;">
-                                        <li class="first-opt" style=""><i class="feather open-card-option icon-chevron-left"></i></li>
-                                        <li><i class="feather icon-maximize full-card"></i></li>
-                                        <li><i class="feather icon-minus minimize-card"></i></li>
-                                        <li><i class="feather icon-refresh-cw reload-card"></i></li>
-                                        <li><i class="feather icon-trash close-card"></i></li>
-                                        <li><i class="feather open-card-option icon-chevron-left"></i></li>
-                                    </ul>
-                                </div> -->
+                                <h5>Gastos</h5>
                             </div>
                             <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Gasto</th>
-                                            <th>Monto</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of mes.cuenta.usuarios[0].gastos">
-                                            <td>
-                                                <input type="text" class="form-control" [value]="item.gasto">
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" [value]="item.monto">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <ul class="nav nav-tabs tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#q1" role="tab">1RA Q</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#q2" role="tab">2DA Q</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tabs card-block">
+                                    <div class="tab-pane active" id="q1">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-sm">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Gasto</th>
+                                                        <th>Monto</th>                                            
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of mes.cuenta.usuarios[0].gastos | filter:1; index as i">
+                                                        <td>
+                                                            <input [(ngModel)]="mes.cuenta.usuarios[0].gastos[i].gasto" type="text" class="form-control" [value]="item.gasto">
+                                                        </td>
+                                                        <td>
+                                                            <input [(ngModel)]="mes.cuenta.usuarios[0].gastos[i].monto" type="text" class="form-control" [value]="item.monto">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="q2">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-sm">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Gasto</th>
+                                                        <th>Monto</th>                                            
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of mes.cuenta.usuarios[0].gastos | filter:2; index as j">
+                                                        <td>
+                                                            <input type="text" class="form-control" [value]="item.gasto">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" [value]="item.monto">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-7">
                         <div class="card">
-                            <div class="card-header">
-                                <h5>2Q</h5>
-                                <!-- <div class="card-header-right">
-                                    <ul class="list-unstyled card-option" style="width: 30px;">
-                                        <li class="first-opt" style=""><i class="feather open-card-option icon-chevron-left"></i></li>
-                                        <li><i class="feather icon-maximize full-card"></i></li>
-                                        <li><i class="feather icon-minus minimize-card"></i></li>
-                                        <li><i class="feather icon-refresh-cw reload-card"></i></li>
-                                        <li><i class="feather icon-trash close-card"></i></li>
-                                        <li><i class="feather open-card-option icon-chevron-left"></i></li>
-                                    </ul>
-                                </div> -->
+                            <div class="card-header"></div>
+                            <div class="card-body">
+                                <p>
+                                    {{ mes.cuenta.usuarios[0].gastos[0].gasto }}
+                                </p>
+                                <p>
+                                    {{ mes.cuenta.usuarios[0].gastos[0].monto }}
+                                </p>
+                                <br>
+                                <button (click)="saveMes()">Save</button>
                             </div>
                         </div>
                     </div>

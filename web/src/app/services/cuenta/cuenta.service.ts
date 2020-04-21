@@ -18,7 +18,7 @@ export class CuentaService {
 
   getCuenta() {
     // const url = `${environment.url}/cuentas/${this.usuarioService.userId}`;
-    const url = `${environment.url}/cuentas/HCTY0s3jGig67bYmGv7I`;
+    const url = `${environment.url}/cuentas/EQdvQTJ4AGZ1w6oa0TER`;
 
     return this.http.get(url);
   }

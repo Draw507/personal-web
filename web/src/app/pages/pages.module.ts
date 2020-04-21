@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { PAGES_ROUTES } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FilterPipe } from '../pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     PagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,

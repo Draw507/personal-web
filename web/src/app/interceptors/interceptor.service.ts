@@ -13,7 +13,7 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const headers = new HttpHeaders({
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token') || ''
     });
 
     const reqClone = req.clone({
