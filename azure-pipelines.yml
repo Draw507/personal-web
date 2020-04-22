@@ -15,9 +15,10 @@ steps:
     versionSpec: '13.x'
   displayName: 'Install Node.js'
 
-- script: |
-    workingDirectory: web
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
-  displayName: 'npm install and build'
+- script: npm install
+  workingDirectory: web
+  displayName: 'Install Dependencies'
+
+- script: npx ng build --prod
+  workingDirectory: web
+  displayName: 'Build'
