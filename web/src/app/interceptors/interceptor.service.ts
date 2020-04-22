@@ -26,7 +26,7 @@ export class InterceptorService implements HttpInterceptor {
   }
 
   manejarError(error: HttpErrorResponse) {
-    console.warn('[InterceptorService][manejarError]: ', error);
+    console.warn('[InterceptorService][manejarError]: Error: ', error);
 
     return throwError(error);
   }
