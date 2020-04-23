@@ -29,10 +29,6 @@ steps:
   workingDirectory: web
   displayName: 'Build'
 
-- script: npx ng test --karmaConfig=karma.conf.ci.js --watch=false
-  workingDirectory: web
-  displayName: 'Tests'
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'web/dist/personal-app'
