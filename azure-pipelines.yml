@@ -25,7 +25,7 @@ steps:
   workingDirectory: web
   displayName: 'Install Dependencies'
 
-- script: npx ng test --karmaConfig karma.conf.ci.js --watch=false
+- script: npx ng test --watch=false
   displayName: 'Tests'
 
 - script: npx ng build --prod
