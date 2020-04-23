@@ -25,10 +25,13 @@ steps:
   workingDirectory: web
   displayName: 'Install Dependencies'
 
-- script: npx ng test --karmaConfig=karma.conf.ci.js --watch=false
-  workingDirectory: web
-  displayName: 'Tests'
-
 - script: npx ng build --prod
   workingDirectory: web
   displayName: 'Build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'web/dist/personal-app'
+    ArtifactName: 'web-app'
+    publishLocation: 'Container'
+  displayName: 'Publish Artifacts'
